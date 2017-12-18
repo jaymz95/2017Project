@@ -1,0 +1,136 @@
+<Page
+    x:Class="Calc.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Calc"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+   <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,8,0,-8" x:Name="gridRoot">
+        <Pivot x:Name="Piv">
+            <PivotItem Header="Stack">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock x:Name="thl" HorizontalAlignment="Center" Text="the scales"></TextBlock>
+                    <StackPanel HorizontalAlignment="Center">
+                    </StackPanel>
+                    <TextBlock x:Name="yup" Text="yuphghj" 
+                       FontSize="32" HorizontalAlignment="Center" Foreground="Purple" />
+                </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Radio">
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <RadioButton Content="CALC" Tag ="5" Checked="RadioButton_Checked" />
+                    <RadioButton Content="CUCK" Tag ="5" Checked="RadioButton_Checked" />
+                    </StackPanel>
+            </PivotItem>
+            <PivotItem Header="Calculator">
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical"  
+                    VerticalAlignment="Top" Background="pink" 
+                    Margin="30, 0, 30, 0">
+                    <TextBlock x:Name="text1" Text="NEW" 
+                       FontSize="32" HorizontalAlignment="Center" Foreground="White" />
+                    <TextBlock x:Name="text2" Text="testing ;)" 
+                       FontSize="34" HorizontalAlignment="Center" Foreground="orange" />
+
+                    <Image Grid.Row="0" Grid.Column="0" x:Name="img"
+               Source="Screenshot_2017-05-20-18-46-40.png" 
+               Stretch="UniformToFill" 
+               HorizontalAlignment="Center"
+               Visibility="Visible" />
+
+                    <Button x:Name="C" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="C" Tag="0" Tapped="bttnClear_Tapped" />
+
+                    <Button x:Name="bttnChange" Grid.Row="1" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" Margin="0, 0, 0, 10" 
+                Content="Change Text" Tapped="bttnChange_Tapped" />
+                
+                    <StackPanel Orientation="Horizontal" Background="CadetBlue">
+                    <Button x:Name="one" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="1" Tag="1" Tapped="bttnInt_Tapped" />  
+                   
+                    <Button x:Name="two" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="2" Tag="2" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="three" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="3" Tag="3" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="four" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="4" Tag="4" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="five" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="5" Tag="5" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="six" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="6" Tag="6" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="seven" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="7" Tag="7" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="eight" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="8" Tag="8" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="nine" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="9" Tag="9" Tapped="bttnInt_Tapped" />
+
+                        <Button x:Name="zero" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="0" Tag="0" Tapped="bttnInt_Tapped" />
+                        
+                        <Button x:Name="Add" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="+" Tapped="bttnAdd_Tapped" />
+                        <Button x:Name="Subt" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="-" Tapped="bttnSubt_Tapped" />
+                        <Button x:Name="Multi" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="X" Tapped="bttnMulti_Tapped" />
+                        <Button x:Name="Divid" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="/" Tapped="bttnDivid_Tapped" />
+                       
+                        <Button x:Name="Equal" Grid.Row="1" 
+                HorizontalAlignment="left" 
+                VerticalAlignment="Top" Margin="5, 5, 5, 5" 
+                Content="=" Tapped="bttnEqual_Tapped" />
+                    </StackPanel>
+                    <TextBlock x:Name="wut" Text="0" 
+                       FontSize="32" HorizontalAlignment="Center" Foreground="purple" />
+                </StackPanel>
+                <!--<Ellipse x:Name="el1" Fill="Red" Tag="Red" Grid.Row="1" Height="50" Width="50" />
+                        -->
+            </PivotItem>
+        </Pivot>
+
+    </Grid>
+</Page>
