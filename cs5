@@ -1,0 +1,344 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
+using Microsoft.VisualBasic;
+
+// j,/using System.Windows.Forms.dll;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+
+
+
+namespace Calc
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    /// 
+    
+    //user input
+    class Scanner : System.IO.StringReader
+    {
+        string currentWord;
+        public Scanner(string source) : base(source)
+        {
+            readNextWord();
+        }
+
+        private void readNextWord()
+        {
+            System.Text.StringBuilder sb = new StringBuilder();
+            char nextChar;
+            int next;
+            do
+            {
+                next = this.Read();
+                if (next < 0)
+                    break;
+                nextChar = (char)next;
+                if (char.IsWhiteSpace(nextChar))
+                    break;
+                sb.Append(nextChar);
+            } while (true);
+            while ((this.Peek() >= 0) && (char.IsWhiteSpace((char)this.Peek())))
+                this.Read();
+            if (sb.Length > 0)
+                currentWord = sb.ToString();
+            else
+                currentWord = null;
+        }
+
+        public bool hasNextInt()
+        {
+            if (currentWord == null)
+                return false;
+            int dummy;
+            return int.TryParse(currentWord, out dummy);
+        }
+
+        public int nextInt()
+        {
+            try
+            {
+                return int.Parse(currentWord);
+            }
+            finally
+            {
+                readNextWord();
+            }
+        }
+
+        public bool hasNextDouble()
+        {
+            if (currentWord == null)
+                return false;
+            double dummy;
+            return double.TryParse(currentWord, out dummy);
+        }
+
+        public double nextDouble()
+        {
+            try
+            {
+                return double.Parse(currentWord);
+            }
+            finally
+            {
+                readNextWord();
+            }
+        }
+
+        public bool hasNext()
+        {
+            return currentWord != null;
+        }
+    }
+    //user input
+
+    public sealed partial class MainPage : Page
+    {
+        private int _Rows;
+
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+        private void bttnChange_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // make something happen now
+            // change the text in the textblock one (maybe two as well)
+            switch (bttnChange.Content.ToString())
+            {
+                case "Change Text":
+                    text1.Text = "old";
+                    img.Visibility = Visibility.Collapsed;
+                    bttnChange.Content = "Change Back";
+                    break;
+                case "Change Back":
+                    text1.Text = "oldest.";
+                    img.Visibility = Visibility.Visible;
+                    bttnChange.Content = "Change Text";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static int num1 = -99999;
+        public static int num2 = -99999;
+        public static int num3 = -99999;
+        public static int num4 = -99999;
+        public static int num5 = -99999;
+        public static int num6 = -99999;
+        public static int total = 0;
+        public static char sum = ' ';
+        public static String st1 = "";
+        public static String st2 = "";
+        public static String st3 = "";
+        public static String st4 = "";
+
+        public void bttnClear_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            num1 = -99999;
+            num2 = -99999;
+            total = 0;
+            wut.Text = total.ToString();
+            //
+        }
+
+            public void bttnInt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+           
+            //the sender parameter hols the radio btton object theat got checked
+            //need to cast it to
+            
+            Button current = (Button)sender;
+
+            if (num1 == -99999)
+            {
+                num1 = Convert.ToInt32(current.Tag);
+            }
+            else if (num2 == -99999)
+            {
+                num2 = Convert.ToInt32(current.Tag);
+            }
+            else if (num3 == -99999)
+            {
+                num3 = Convert.ToInt32(current.Tag);
+            }
+            else if (num4 == -99999)
+            {
+                num4 = Convert.ToInt32(current.Tag);
+            }
+            else if (num5 == -99999)
+            {
+                num5 = Convert.ToInt32(current.Tag);
+            }
+            else if (num6 == -99999)
+            {
+                num6 = Convert.ToInt32(current.Tag);
+            }
+        
+        }
+
+        public void bttnEqual_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sum == 'm')
+            {
+                total = num1 * num2;
+            }
+            else if (sum == 'd')
+            {
+                total = num1 / num2;
+            }
+            else if (sum == 'a')
+            {
+                total = num1 + num2;
+            }
+            else if (sum == 's')
+            {
+                total = num1 - num2;
+            }
+            wut.Text = total.ToString();
+        }
+
+        public void bttnDivid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'd';
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+        }
+
+        public void bttnSubt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 's';
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+        }
+
+        public void bttnAdd_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'a';
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+        }
+
+        public void bttnMulti_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'm';
+
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+
+            if (num3 != -99999)
+            {
+                st1 = num1.ToString();
+                st3 = num3.ToString();
+
+                st1 += st3;
+
+                num1 = Convert.ToInt32(st1);
+
+                num3 = -99999;
+            }
+
+            //
+
+
+            /*switch (bttnChange.Content.ToString())
+            {
+                case "Change Text":
+                    text1.Text = "old";
+                    img.Visibility = Visibility.Collapsed;
+                    bttnChange.Content = "Change Back";
+                    break;
+                case "Change Back":
+                    text1.Text = "oldest.";
+                    img.Visibility = Visibility.Visible;
+                    bttnChange.Content = "Change Text";
+                    break;
+                default:
+                    break;
+            }*/
+        }
+
+        public void Nnn()
+        {
+           // string input = Microsoft.VisualBasic.Interaction.InputBox("Prompt", "Title", "Default", -1, -1);
+
+            String message, title, defaultValue;
+            String myValue;
+
+            message = "Enter a value between 1 and 3";
+
+            title = "InputBox Demo";
+            defaultValue = "1";
+
+            //myValue = Microsoft.VisualBasic.Interaction.InputBox(message, title, defaultValue);
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            //the sender parameter hols the radio btton object theat got checked
+            //need to cast it to 
+            RadioButton current = (RadioButton)sender;
+            //find which number from the content
+            _Rows = Convert.ToInt32(current.Tag);
+            Nnn();
+            //setupThePieces();
+            //#endregion
+        }
+    }
+}
