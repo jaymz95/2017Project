@@ -1,0 +1,588 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
+using Microsoft.VisualBasic;
+
+// j,/using System.Windows.Forms.dll;
+
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+
+
+namespace Calc
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    /// 
+    
+    
+
+    public sealed partial class MainPage : Page
+    {
+        private int _Rows;
+
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+        private void bttnChange_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            // make something happen now
+            // change the text in the textblock one (maybe two as well)
+            switch (bttnChange.Content.ToString())
+            {
+                case "Change Text":
+                    text1.Text = "old";
+                    img.Visibility = Visibility.Collapsed;
+                    bttnChange.Content = "Change Back";
+                    break;
+                case "Change Back":
+                    text1.Text = "oldest.";
+                    img.Visibility = Visibility.Visible;
+                    bttnChange.Content = "Change Text";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public static int num1 = -99999;
+        public static int num2 = -99999;
+        public static int num3 = -99999;
+        public static int num4 = -99999;
+        public static int num5 = -99999;
+        public static int num6 = -99999;
+        public static int num7 = -99999;
+        public static int num8 = -99999;
+        public static int total = 0;
+        public static char sum = ' ';
+        public static String st1 = "";
+        public static String st2 = "";
+        public static String st3 = "";
+        public static String st4 = "";
+        public static String st5 = "";
+        public static String st6 = "";
+        public static String st7 = "";
+        public static String st8 = "";
+
+        public void bttnClear_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            num1 = -99999;
+            num2 = -99999;
+            total = 0;
+            wut.Text = total.ToString();
+            err.Text = " ";
+            tot.Text = " ";
+        }
+
+            public void bttnInt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+           
+            //the sender parameter hols the radio btton object theat got checked
+            //need to cast it to
+            
+            Button current = (Button)sender;
+
+            if (num1 == -99999)
+            {
+                num1 = Convert.ToInt32(current.Tag);
+                st1 = num1.ToString();
+
+                tot.Text = st1;
+            }
+            else if (num2 == -99999)
+            {
+                num2 = Convert.ToInt32(current.Tag);
+                st1 = num2.ToString();
+                tot.Text += st1;
+            }
+            else if (num3 == -99999)
+            {
+                num3 = Convert.ToInt32(current.Tag);
+                st1 = num3.ToString();
+                tot.Text += st1;
+            }
+            else if (num4 == -99999)
+            {
+                num4 = Convert.ToInt32(current.Tag);
+                st1 = num4.ToString();
+                tot.Text += st1;
+            }
+            else if (num5 == -99999)
+            {
+                num5 = Convert.ToInt32(current.Tag);
+                st1 = num5.ToString();
+                tot.Text += st1;
+            }
+            else if (num6 == -99999)
+            {
+                num6 = Convert.ToInt32(current.Tag);
+                st1 = num6.ToString();
+                tot.Text += st1;
+            }
+            else if (num7 == -99999)
+            {
+                num7 = Convert.ToInt32(current.Tag);
+                st1 = num7.ToString();
+                tot.Text += st1;
+            }
+            else if (num8 == -99999)
+            {
+                num8 = Convert.ToInt32(current.Tag);
+                st1 = num8.ToString();
+                tot.Text += st1;
+            }
+        }
+
+        public void bttnEqual_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tot.Text += " = ";
+
+            if (num3 != -99999)
+            {
+                st2 = num2.ToString();
+                st3 = num3.ToString();
+
+                st2 += st3;
+
+                num2 = Convert.ToInt32(st2);
+
+                num3 = -99999;
+            }
+
+            if (num4 != -99999)
+            {
+                st2 = num2.ToString();
+                st4 = num4.ToString();
+
+                st2 += st4;
+
+                num2 = Convert.ToInt32(st2);
+
+                num4 = -99999;
+            }
+
+            if (num5 != -99999)
+            {
+                st2 = num2.ToString();
+                st5 = num5.ToString();
+
+                st2 += st5;
+
+                num2 = Convert.ToInt32(st2);
+
+                num5 = -99999;
+            }
+            if (num6 != -99999)
+            {
+                st2 = num2.ToString();
+                st6 = num6.ToString();
+
+                st2 += st6;
+
+                num2 = Convert.ToInt32(st2);
+
+                num6 = -99999;
+            }
+
+            if (num7 != -99999)
+            {
+                st2 = num2.ToString();
+                st7 = num7.ToString();
+
+                st2 += st7;
+
+                num2 = Convert.ToInt32(st2);
+
+                num7 = -99999;
+            }
+
+            if (num8 != -99999)
+            {
+                st8 = "Number entered to big. " + Environment.NewLine + "Try a number smaller than 1000000!";
+
+                err.Text = st8;
+
+                num8 = -99999;
+            }
+
+            if (sum == 'm')
+            {
+                
+                total = num1 * num2;
+                if (err.Text != " ")
+                {
+                    total = 0;
+                }
+                /*st1 = num1.ToString();
+                st2 = num2.ToString();
+                st1 = st1 + " X " + st2 + " = ";
+
+                tot.Text = st1;*/
+            }
+            else if (sum == 'd')
+            {
+                total = num1 / num2;
+                if (err.Text != " ")
+                {
+                    total = 0;
+                }
+            }
+            else if (sum == 'a')
+            {
+                total = num1 + num2;
+                if (err.Text != " ")
+                {
+                    total = 0;
+                }
+            }
+            else if (sum == 's')
+            {
+                total = num1 - num2;
+                if (err.Text != " ")
+                {
+                    total = 0;
+                }
+            }
+            wut.Text = total.ToString();
+        }
+
+        public void bttnDivid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'd';
+
+            tot.Text += " / ";
+
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+
+            if (num3 != -99999)
+            {
+                st1 = num1.ToString();
+                st3 = num3.ToString();
+
+                st1 += st3;
+
+                num1 = Convert.ToInt32(st1);
+
+                num3 = -99999;
+            }
+
+            if (num4 != -99999)
+            {
+                st1 = num1.ToString();
+                st4 = num4.ToString();
+
+                st1 += st4;
+
+                num1 = Convert.ToInt32(st1);
+
+                num4 = -99999;
+            }
+
+            if (num5 != -99999)
+            {
+                st1 = num1.ToString();
+                st5 = num5.ToString();
+
+                st1 += st5;
+
+                num1 = Convert.ToInt32(st1);
+
+                num5 = -99999;
+            }
+
+            if (num6 != -99999)
+            {
+                st1 = num1.ToString();
+                st6 = num6.ToString();
+
+                st1 += st6;
+
+                num1 = Convert.ToInt32(st1);
+
+                num6 = -99999;
+            }
+
+            if (num7 != -99999)
+            {
+                st7 = "Number entered to big. " + Environment.NewLine + "Try a number smaller than 1000000!";
+
+                err.Text = st7;
+            }
+        }
+
+        public void bttnSubt_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 's';
+
+            tot.Text += " - ";
+
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+
+            if (num3 != -99999)
+            {
+                st1 = num1.ToString();
+                st3 = num3.ToString();
+
+                st1 += st3;
+
+                num1 = Convert.ToInt32(st1);
+
+                num3 = -99999;
+            }
+
+            if (num4 != -99999)
+            {
+                st1 = num1.ToString();
+                st4 = num4.ToString();
+
+                st1 += st4;
+
+                num1 = Convert.ToInt32(st1);
+
+                num4 = -99999;
+            }
+
+            if (num5 != -99999)
+            {
+                st1 = num1.ToString();
+                st5 = num5.ToString();
+
+                st1 += st5;
+
+                num1 = Convert.ToInt32(st1);
+
+                num5 = -99999;
+            }
+
+            if (num6 != -99999)
+            {
+                st1 = num1.ToString();
+                st6 = num6.ToString();
+
+                st1 += st6;
+
+                num1 = Convert.ToInt32(st1);
+
+                num6 = -99999;
+            }
+
+            if (num7 != -99999)
+            {
+                st7 = "Number entered to big. " + Environment.NewLine + "Try a number smaller than 1000000!";
+
+                err.Text = st7;
+            }
+        }
+
+        public void bttnAdd_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'a';
+            
+            tot.Text += " + ";
+
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+
+            if (num3 != -99999)
+            {
+                st1 = num1.ToString();
+                st3 = num3.ToString();
+
+                st1 += st3;
+
+                num1 = Convert.ToInt32(st1);
+
+                num3 = -99999;
+            }
+
+            if (num4 != -99999)
+            {
+                st1 = num1.ToString();
+                st4 = num4.ToString();
+
+                st1 += st4;
+
+                num1 = Convert.ToInt32(st1);
+
+                num4 = -99999;
+            }
+
+            if (num5 != -99999)
+            {
+                st1 = num1.ToString();
+                st5 = num5.ToString();
+
+                st1 += st5;
+
+                num1 = Convert.ToInt32(st1);
+
+                num5 = -99999;
+            }
+
+            if (num6 != -99999)
+            {
+                st1 = num1.ToString();
+                st6 = num6.ToString();
+
+                st1 += st6;
+
+                num1 = Convert.ToInt32(st1);
+
+                num6 = -99999;
+            }
+
+            if (num7 != -99999)
+            {
+                st7 = "Number entered to big. " + Environment.NewLine + "Try a number smaller than 1000000!";
+
+                err.Text = st7;
+            }
+        }
+
+        public void bttnMulti_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            sum = 'm';
+
+            tot.Text += " X ";
+
+            if (num2 != -99999)
+            {
+                st1 = num1.ToString();
+                st2 = num2.ToString();
+
+                st1 += st2;
+
+                num1 = Convert.ToInt32(st1);
+
+                num2 = -99999;
+            }
+
+            if (num3 != -99999)
+            {
+                st1 = num1.ToString();
+                st3 = num3.ToString();
+
+                st1 += st3;
+
+                num1 = Convert.ToInt32(st1);
+
+                num3 = -99999;
+            }
+
+            if (num4 != -99999)
+            {
+                st1 = num1.ToString();
+                st4 = num4.ToString();
+
+                st1 += st4;
+
+                num1 = Convert.ToInt32(st1);
+
+                num4 = -99999;
+            }
+
+            if (num5 != -99999)
+            {
+                st1 = num1.ToString();
+                st5 = num5.ToString();
+
+                st1 += st5;
+
+                num1 = Convert.ToInt32(st1);
+
+                num5 = -99999;
+            }
+
+            if (num6 != -99999)
+            {
+                st1 = num1.ToString();
+                st6 = num6.ToString();
+
+                st1 += st6;
+
+                num1 = Convert.ToInt32(st1);
+
+                num6 = -99999;
+            }
+
+            if (num7 != -99999)
+            {
+                st7 = "Number entered to big. " + Environment.NewLine + "Try a number smaller than 1000000!";
+
+                err.Text = st7;
+
+
+            }
+
+            //
+
+
+            /*switch (bttnChange.Content.ToString())
+            {
+                case "Change Text":
+                    text1.Text = "old";
+                    img.Visibility = Visibility.Collapsed;
+                    bttnChange.Content = "Change Back";
+                    break;
+                case "Change Back":
+                    text1.Text = "oldest.";
+                    img.Visibility = Visibility.Visible;
+                    bttnChange.Content = "Change Text";
+                    break;
+                default:
+                    break;
+            }*/
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton current = (RadioButton)sender;
+            _Rows = Convert.ToInt32(current.Tag);
+        }
+    }
+}
